@@ -1,31 +1,35 @@
-#include<iostream>
 #include <bits/stdc++.h>
 using namespace std;
-
-void reverseWords(string s) {
-    bool neww = true;
-    vector <string> ans;
-    string ss = "";
-    for (int i = 0; i < s.length(); i++) {
-        if (s[i] == ' ') {
-            if (ss.size() != 0) ans.push_back(ss);
-            ss = "";
-        } else {
-            ss += s[i];
+void reverse(string s)
+{
+     string tmp = "";
+        s += ' ';
+        stack<string> st;
+        for(int i = 0; i < s.length(); i++){
+            if(s[i] != ' ')
+                tmp += s[i];
+            if(tmp.length() > 0 && s[i] == ' '){
+                st.push(tmp);
+                tmp = "";
+            }            
         }
-    }
-    if (ss.size() != 0) ans.push_back(ss);
-    reverse(ans.begin(), ans.end());
-    string ret = "";
-    for (auto i : ans) {
-        ret += i;
-        ret += " ";
-    }
-    ret.pop_back();
-    cout << ret;
-}
+        
+        string ans = "";
+        while(!st.empty()){
+            tmp = st.top();
+            st.pop();
+            
+            ans += tmp;
+            ans += ' ';
+        }
+        ans = ans.substr(0, ans.length()-1);
+		cout<<ans;
+		}
+ 
 int main () {
-	string str;
-	getline(cin,str);
-    reverseWords(str);
+
+string s;
+getline(cin,s);
+reverse(s);
+	return 0;
 }
